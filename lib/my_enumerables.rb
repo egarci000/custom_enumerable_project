@@ -17,13 +17,8 @@ module Enumerable
   end
 
   def my_all?
-    arr = []
     self.each do |elem|
-      arr << yield(elem)
-    end
-
-    arr.each do |elem|
-      return false if elem == false
+      return false if yield(elem) == false
     end
     true
   end
@@ -44,11 +39,11 @@ module Enumerable
 
   def my_count
     return self.length unless block_given?
-    arr = []
+    count = 0
     self.each do |elem|
-      arr << elem if yield(elem)
+      count += 1 if yield(elem)
     end
-    arr.length
+    count
   end
 
   def my_map
